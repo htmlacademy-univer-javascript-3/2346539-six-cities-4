@@ -1,6 +1,6 @@
 function FavoritePage(): JSX.Element {
   return (
-   <div className="page">
+    <div className="page">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -165,7 +165,7 @@ function FavoritePage(): JSX.Element {
         </a>
       </footer>
     </div>
-);
+  );
 }
 
 export default FavoritePage;

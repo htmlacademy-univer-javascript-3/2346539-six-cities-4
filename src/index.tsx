@@ -13,9 +13,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <h1>Hello, World!</h1>
-    <App
-      placesCount={Setting.PlacesCount}
-    />
+    <App placesCount={Setting.PlacesCount} />
   </React.StrictMode>
 );

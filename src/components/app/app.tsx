@@ -6,7 +6,7 @@ type AppPageProps = {
 
 function App({placesCount}: AppPageProps): JSX.Element {
   return (
-    <MainPage/>
+    <MainPage placesCount={placesCount} />
   );
 }
 
