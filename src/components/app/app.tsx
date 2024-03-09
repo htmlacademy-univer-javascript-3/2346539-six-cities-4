@@ -2,14 +2,12 @@ import FavoritePage from '../../pages/favorites';
 import LoginPage from '../../pages/login';
 import MainPage from '../../pages/mainPage';
 
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link
-} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import OfferPage from '../../pages/offer';
 import Page404 from '../../pages/page404';
+import AppLink from '../links';
+import PrivateRoute from '../PrivateRoute';
+import AuthorizationPage from '../Authorization';
 
  type AppPageProps = {
   placesCount: number;
@@ -17,39 +15,40 @@ import Page404 from '../../pages/page404';
 
 function App({placesCount}: AppPageProps): JSX.Element {
   return (
-   // <MainPage placesCount={placesCount} />
-   <BrowserRouter>
-   <Routes>
-     // '/url1' — подстрока, которая должна содержаться в адресной строке,
-     // чтобы был отображён компонент Page1
-     <Route
-       path='/'
-       element={<MainPage placesCount={placesCount}/>}
-     />
-     // '/url2' — подстрока, которая должна содержаться в адресной строке,
-     // чтобы был отображён компонент Page2
-     <Route
-       path='/login'
-       element={<LoginPage />}
-     />
-     ....
-     // '/urlN; — подстрока, которая должна содержаться в адресной строке,
-     // чтобы был отображён компонент PageN
-     <Route
-       path='/favorites'
-       element={<FavoritePage />}
-     />
-      <Route
-       path='/offer/:id'
-       element={<OfferPage />}
-     />
-      <Route
-       path='*'
-       element={<Page404 />}
-     />
-   </Routes>
- </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path={AppLink.mainPage}
+          element={<MainPage placesCount={placesCount}/>}
+        />
 
+        <Route
+          path={AppLink.loginPage}
+          element={<LoginPage />}
+        />
+
+        <Route
+          path={AppLink.favoritePage}
+          element={
+            <PrivateRoute
+              authorizationStatus={AuthorizationPage.NotAuth}
+            >
+              <FavoritePage />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path={AppLink.offerPage}
+          element={<OfferPage />}
+        />
+
+        <Route
+          path={AppLink.errorPage}
+          element={<Page404 />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
