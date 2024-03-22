@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import { offers } from './mocks/offers';
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Setting = {
@@ -13,6 +14,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App placesCount={Setting.PlacesCount} />
+    <App placesCount={Setting.PlacesCount} offers={offers} />
   </React.StrictMode>
 );

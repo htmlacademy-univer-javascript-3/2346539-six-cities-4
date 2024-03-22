@@ -1,9 +1,12 @@
 import Card from '../components/Card';
+import CardsList from '../components/CardList';
+import { Offer } from '../types/offerType';
 type MainPageProps = {
   placesCount: number;
+  offers: Offer[];
 }
 
-function MainPage({placesCount}: MainPageProps): JSX.Element {
+function MainPage({placesCount, offers}: MainPageProps): JSX.Element {
   return (
 
     <div className="page page--gray page--main">
@@ -94,14 +97,9 @@ function MainPage({placesCount}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-
-              </div>
+              <CardsList
+              citiesCards={offers}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
