@@ -25,7 +25,7 @@ export const offers: Offer[] = [
 {
     'id': '1',
     'previewImage': 'img/apartment-02.jpg',
-    'title': 'Beautiful & luxurious studio at great location',
+    'title': 'Luxurious studio at great location',
     'isPremium': true,
     'isFavorite': true,
     'type': 'Apartment',
@@ -46,9 +46,9 @@ export const offers: Offer[] = [
 {
     'id': '2',
     'previewImage': 'img/apartment-03.jpg',
-    'title': 'Beautiful & luxurious studio at great location',
+    'title': 'Beautiful studio at great location',
     'isPremium': true,
-    'isFavorite': true,
+    'isFavorite': false,
     'type': 'Apartment',
     'rating': 4.8,
     'city': {
@@ -56,7 +56,7 @@ export const offers: Offer[] = [
     },
     'bedrooms': 3,
     'guests': 4,
-    'price': 1400,
+    'price': 140,
     'author': {
         'previewImage':'img/avatar-angelina.jpg',
         'name': 'Angelina',
@@ -66,8 +66,8 @@ export const offers: Offer[] = [
 
 {
     'id': '3',
-    'previewImage': 'img/apartment-04.jpg',
-    'title': 'Beautiful & luxurious studio at great location',
+    'previewImage': 'img/room.jpg',
+    'title': 'Beautiful room',
     'isPremium': true,
     'isFavorite': true,
     'type': 'Apartment',

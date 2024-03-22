@@ -16,6 +16,7 @@ type AppPageProps = {
 }
 
 function App({placesCount, offers}: AppPageProps): JSX.Element {
+  const favorites = offers.filter((o) => o.isFavorite);
   return (
     <BrowserRouter>
       <Routes>
@@ -33,9 +34,11 @@ function App({placesCount, offers}: AppPageProps): JSX.Element {
           path={AppLink.favoritePage}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationPage.NotAuth}
+              authorizationStatus={AuthorizationPage.Auth}
             >
-              <FavoritePage />
+              <FavoritePage
+              favorites={favorites}
+              />
             </PrivateRoute>
           }
         />

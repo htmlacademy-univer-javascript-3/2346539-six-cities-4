@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Offer } from "../types/offerType";
 
 type PlaceCardProp = {
@@ -53,7 +54,8 @@ function Card({offerInfo}: PlaceCardProp): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+        <Link to={`/offer/${id}`} state={offerInfo}>{title}
+        </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
