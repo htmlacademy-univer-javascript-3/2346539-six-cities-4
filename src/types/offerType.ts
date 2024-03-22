@@ -2,7 +2,7 @@ export type Offer = {
     previewImage: string;
     id: string;
     isPremium: boolean;
-    price: number;  
+    price: number;
     title: string;
     type: string;
     isFavorite: boolean;
@@ -13,13 +13,13 @@ export type Offer = {
     city: City;
     }
 
-    export type Author = {
+export type Author = {
     previewImage: string;
     name: string;
     isPro: boolean;
     }
 
-    export type City = {
+export type City = {
     name: string;
     //latitude: number;
     //longitude: number;

@@ -6,13 +6,13 @@ type CardsListProps = {
 };
 
 function CardsList({citiesCards}: CardsListProps) {
-return (
+  return (
     <div className="cities__places-list places__list tabs__content">
-    {citiesCards.map((city) => (
+      {citiesCards.map((city) => (
         <Card key={city.id} offerInfo={city}/>
-    ))}
+      ))}
     </div>
-);
+  );
 }
 
 export default CardsList;

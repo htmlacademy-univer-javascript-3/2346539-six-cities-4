@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import Card from "../components/Card";
-import { Offer } from "../types/offerType";
+import { Link } from 'react-router-dom';
+import Card from '../components/Card';
+import { Offer } from '../types/offerType';
 
 type FavoritesPageProp = {
   favorites: Offer[];
@@ -21,7 +21,7 @@ function FavoritePage({favorites}:FavoritesPageProp): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link to='/'  className="header__logo-link" >
+              <Link to='/' className="header__logo-link" >
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </Link>
             </div>
@@ -51,24 +51,24 @@ function FavoritePage({favorites}:FavoritesPageProp): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-            {Object.keys(favoritesMap).map((city) => (
+              {Object.keys(favoritesMap).map((city) => (
                 <li className="favorites__locations-items" key={city}>
                   <div className="favorites__locations locations locations--current">
                     <div className="locations__item">
                       <a className="locations__item-link" href="#">
                         <span>{city}</span>
-                    </a>
+                      </a>
+                    </div>
                   </div>
-                </div>
                   <div className="favorites__places">
                     {favoritesMap[city].map((place) => (
                       <Card key={place.id} offerInfo={place}/>
                     ))}
                   </div>
-              </li>
+                </li>
               ))}
             </ul>
-          
+
           </section>
         </div>
       </main>

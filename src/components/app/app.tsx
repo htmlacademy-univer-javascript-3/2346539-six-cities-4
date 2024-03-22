@@ -37,7 +37,7 @@ function App({placesCount, offers}: AppPageProps): JSX.Element {
               authorizationStatus={AuthorizationPage.Auth}
             >
               <FavoritePage
-              favorites={favorites}
+                favorites={favorites}
               />
             </PrivateRoute>
           }
