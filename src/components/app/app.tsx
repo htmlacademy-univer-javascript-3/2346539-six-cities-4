@@ -8,18 +8,21 @@ import Page404 from '../../pages/page404';
 import AppLink from '../links';
 import PrivateRoute from '../PrivateRoute';
 import AuthorizationPage from '../Authorization';
+import { Offer } from '../../types/offerType';
 
- type AppPageProps = {
+type AppPageProps = {
   placesCount: number;
+  offers: Offer[];
 }
 
-function App({placesCount}: AppPageProps): JSX.Element {
+function App({placesCount, offers}: AppPageProps): JSX.Element {
+  const favorites = offers.filter((o) => o.isFavorite);
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppLink.mainPage}
-          element={<MainPage placesCount={placesCount}/>}
+          element={<MainPage placesCount={placesCount} offers={offers}/>}
         />
 
         <Route
@@ -31,9 +34,11 @@ function App({placesCount}: AppPageProps): JSX.Element {
           path={AppLink.favoritePage}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationPage.NotAuth}
+              authorizationStatus={AuthorizationPage.Auth}
             >
-              <FavoritePage />
+              <FavoritePage
+                favorites={favorites}
+              />
             </PrivateRoute>
           }
         />
