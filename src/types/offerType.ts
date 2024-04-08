@@ -13,6 +13,7 @@ export type Offer = {
     bedrooms: number;
     guests: number;
     author: Author;
+    nearPlaces: Offers;
     }
 
 export type Author = {
@@ -20,3 +21,5 @@ export type Author = {
     name: string;
     isPro: boolean;
     }
+    
+export type Offers = Offer[]
