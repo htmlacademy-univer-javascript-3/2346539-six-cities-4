@@ -100,6 +100,7 @@ function MainPage({placesCount, offers}: MainPageProps): JSX.Element {
               </form>
               <CardsList
                 citiesCards={offers}
+                searchType='regular'
               />
             </section>
             <div className="cities__right-section">

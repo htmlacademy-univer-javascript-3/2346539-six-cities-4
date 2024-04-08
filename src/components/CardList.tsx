@@ -3,13 +3,18 @@ import { Offer } from '../types/offerType';
 
 type CardsListProps = {
     citiesCards: Offer[];
+    searchType: 'regular' | 'near';
 };
 
-function CardsList({citiesCards}: CardsListProps) {
+function CardsList({citiesCards, searchType}: CardsListProps) {
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div
+    className={`${searchType === 'regular'
+      ? 'cities__places-list tabs__content'
+      : 'near-places__list'} places__list `}
+  >
       {citiesCards.map((city) => (
-        <Card key={city.id} offerInfo={city}/>
+        <Card key={city.id} offerInfo={city} searchType={searchType}/>
       ))}
     </div>
   );
