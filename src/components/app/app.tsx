@@ -5,9 +5,8 @@ import MainPage from '../../pages/mainPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import OfferPage from '../../pages/offer';
 import Page404 from '../../pages/page404';
-import AppLink from '../links';
 import PrivateRoute from '../PrivateRoute';
-import AuthorizationPage from '../Authorization';
+import { AuthorizationPage, AppLink } from '../constants/all_constants';
 import { Offer } from '../../types/offerType';
 
 type AppPageProps = {

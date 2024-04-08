@@ -1,6 +1,5 @@
 import {Navigate} from 'react-router-dom';
-import AuthorizationPage from './Authorization';
-import AppLink from './links';
+import { AuthorizationPage, AppLink } from './constants/all_constants';
 
 
 type PrivateRouteProps = {

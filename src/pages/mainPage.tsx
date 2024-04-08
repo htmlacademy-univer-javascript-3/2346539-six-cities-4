@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import CardsList from '../components/CardList';
 import { Offer } from '../types/offerType';
+import CityMap from '../components/cityMap';
 type MainPageProps = {
   placesCount: number;
   offers: Offer[];
@@ -102,7 +103,9 @@ function MainPage({placesCount, offers}: MainPageProps): JSX.Element {
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <CityMap city={offers[0].city}points={offers}/>
+              </section>
             </div>
           </div>
         </div>
