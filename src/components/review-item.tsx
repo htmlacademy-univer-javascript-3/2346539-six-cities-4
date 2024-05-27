@@ -32,7 +32,7 @@ function ReviewItem({ review }: ReviewItemProps): JSX.Element {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime={new Date(date).toISOString()}> {new Date(date).toDateString()}</time>
+        <time className="reviews__time" dateTime={new Date(date).toISOString()}> {new Date(date).toDateString().slice(3,)}</time>
       </div>
     </li>
   );

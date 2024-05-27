@@ -14,9 +14,7 @@ export default function CitiesList({ cities, currentCity, onCityClick }: CitiesL
       {cities.map((city) => (
         <li className="locations__item" key={city.name}>
           <a
-            className={`locations__item-link tabs__item ${
-              currentCity.name === city.name ? 'tabs__item--active' : ''
-            }`}
+            className="tabs__item locations__item-link" style={city === currentCity ? {textShadow: '1px 0 0, .5px 0 0, -1px 0 0'} : {}}
             href="#"
             onClick={() => onCityClick(city)}
           >
