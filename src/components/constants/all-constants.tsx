@@ -31,7 +31,7 @@ export const URL_MARKER_DEFAULT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
 
 export const URL_MARKER_CURRENT =
-  'public/img/pin-active.svg';
+  '/img/pin-active.svg';
 
 export const getRating = (rate: number) => `${(rate / 5) * 100}%`;
 
@@ -45,7 +45,9 @@ export enum sortTypes {
 export enum ApiRoute {
   Offers = '/offers',
   Reviews = '/comments',
-  Favourites = '/favorite'
+  Favourites = '/favorite',
+  Login = '/login',
+  Logout = '/logout'
 }
 
 export enum ApiConst {
@@ -55,9 +57,9 @@ export enum ApiConst {
 }
 
 export enum LoadingStatus {
-  Idle,
   Pending,
   Success,
   Error
 }
+
 

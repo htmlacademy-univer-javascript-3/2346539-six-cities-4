@@ -1,8 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { loadOffers, cityChange, sortTypeSelect, highlightMarker, setLoadingStatus, setCity } from './action';
-import { LoadingStatus, sortTypes } from '../components/constants/all-constants';
+import { loadOffers, cityChange, sortTypeSelect, highlightMarker, setLoadingStatus, setCity, setAuthStatus, setAuthor } from './action';
+import { AuthStatus, LoadingStatus, sortTypes } from '../components/constants/all-constants';
 import { City, defaultCity } from '../types/city';
 import { Offer } from '../types/offer';
+import { Author } from '../types/review';
 
 type StateType = {
   city: City;
@@ -10,6 +11,8 @@ type StateType = {
   sortType: sortTypes;
   loadingStatus: LoadingStatus;
   selectedMarker: { id: string } | null;
+  authStatus: AuthStatus;
+  author?: Author;
 };
 
 const initialState: StateType = {
@@ -18,6 +21,8 @@ const initialState: StateType = {
   sortType: sortTypes.Popular,
   loadingStatus: LoadingStatus.Success,
   selectedMarker: null,
+  authStatus: AuthStatus.Unknown,
+  author: undefined
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -42,6 +47,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(highlightMarker, (state, { payload }) => {
       state.selectedMarker = payload;
+    })
+    .addCase(setAuthStatus, (state, { payload }) => {
+      state.authStatus = payload;
+    })
+    .addCase(setAuthor, (state, { payload }) => {
+      state.author = payload;
     });
 });
 

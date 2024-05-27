@@ -4,7 +4,7 @@ import LoginPage from '../pages/login-page/login-page';
 import FavouritesPage from '../pages/favourites-page/favourites-page';
 import OfferPage from '../pages/offer-page/offer-page';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
-import { AppRoute, AuthStatus } from './constants/all-constants';
+import { AppRoute } from './constants/all-constants';
 import PrivateRoute from './private-route';
 
 
@@ -18,7 +18,7 @@ function App(): JSX.Element {
 
         <Route path={AppRoute.Favorites}
           element={
-            <PrivateRoute authStatus={AuthStatus.Auth}>
+            <PrivateRoute>
               <FavouritesPage/>
             </PrivateRoute>
           }
