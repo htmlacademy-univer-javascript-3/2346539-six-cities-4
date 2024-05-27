@@ -42,3 +42,22 @@ export enum sortTypes {
   Top = 'Top rated first',
 }
 
+export enum ApiRoute {
+  Offers = '/offers',
+  Reviews = '/comments',
+  Favourites = '/favorite'
+}
+
+export enum ApiConst {
+  baseURL = 'https://14.design.htmlacademy.pro/six-cities',
+  RequestTimeout = 5000,
+  TokenKeyName = 'six-cities-token'
+}
+
+export enum LoadingStatus {
+  Idle,
+  Pending,
+  Success,
+  Error
+}
+

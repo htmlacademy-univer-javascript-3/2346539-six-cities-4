@@ -2,11 +2,9 @@ import { Link } from 'react-router-dom';
 import PlaceCard from '../../components/place-card';
 import { Offer } from '../../types/offer';
 
-type FavoritesPageProp = {
-  favorites: Offer[];
-};
 
-function FavouritesPage({favorites}: FavoritesPageProp): JSX.Element {
+function FavouritesPage(): JSX.Element {
+  const favorites: Offer[] = [];
   const favoritesMap = favorites.reduce(
     (cityMap: Record<string, Offer[]>, place: Offer) => {
       const city = place.city.name;

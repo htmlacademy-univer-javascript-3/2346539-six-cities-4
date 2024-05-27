@@ -1,20 +1,22 @@
-import { City } from './city';
-import { Author } from './review';
+import { City, Location } from './city';
+import { Author, Review } from './review';
 
 export type Offer = {
-    id: string;
-    previewImage: string;
-    title: string;
-    isPremium: boolean;
-    isFavorite: boolean;
-    type: string;
-    rating: number;
     city: City;
-    numOfBedrooms: number;
-    numOfGuests: number;
+    id: string;
+    isFavorite: boolean;
+    isPremium: boolean;
+    location: Location;
+    previewImage: string;
     price: number;
+    rating: number;
+    title: string;
+    type: string;
+    reviews: Review[];
     masterInf: Author;
     nearPlaces: Offers;
+    images: { src: string; alt: string }[];
+    description: string;
 };
 
 export type Offers = Offer[]
