@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { City } from '../types/city';
 import { Cities } from './constants/cities';
 
@@ -7,7 +8,7 @@ type CitiesListProps = {
   onCityClick: (cityName: City) => void;
 };
 
-export default function CitiesList({ cities, currentCity, onCityClick }: CitiesListProps): JSX.Element {
+function CitiesList({ cities, currentCity, onCityClick }: CitiesListProps): JSX.Element {
 
   return (
     <ul className="locations__list tabs__list">
@@ -25,3 +26,6 @@ export default function CitiesList({ cities, currentCity, onCityClick }: CitiesL
     </ul>
   );
 }
+
+const CitiesListMemo = memo(CitiesList);
+export default CitiesListMemo;

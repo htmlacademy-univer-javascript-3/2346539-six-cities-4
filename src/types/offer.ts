@@ -21,6 +21,7 @@ export type Offer = {
     goods?: string[];
     host?: Author;
     maxAdults?: number;
+    status?: number;
 };
 
 export type Offers = Offer[]

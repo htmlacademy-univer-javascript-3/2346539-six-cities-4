@@ -28,13 +28,12 @@ function CityMap({ city, points }: CityMapProp): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
-  const selectedMarker = useAppSelector((state) => state.selectedMarker);
+  const selectedMarker = useAppSelector((state) => state.offersReducer.selectedMarker);
 
   useEffect(() => {
     if (map) {
-      // Центрируем карту на выбранном месте, если оно задано
       if (!selectedMarker) {
-        map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+        map.flyTo([city.location.latitude, city.location.longitude], city.location.zoom);
       }
       const markerLayer = layerGroup().addTo(map);
       points.forEach((point) => {

@@ -1,13 +1,20 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from './constants/all-constants';
 import { AuthStatus } from './constants/all-constants';
-import { useAppSelector } from './hooks';
+import { useAppDispatch, useAppSelector } from './hooks';
+import { logout } from '../store/api-actions';
 
 function Header(): JSX.Element {
-  const auth = useAppSelector((state) => state.authStatus === AuthStatus.Auth);
-  const email = useAppSelector((state) => state.author?.email);
-  const avatarUrl = useAppSelector((state) => state.author?.avatarUrl);
-  const favorites = useAppSelector((state) => state.offers).filter((offer) => offer.isFavorite);
+  const auth = useAppSelector((state) => state.userReducer.authStatus === AuthStatus.Auth);
+  const email = useAppSelector((state) => state.userReducer.author?.email);
+  const avatarUrl = useAppSelector((state) => state.userReducer.author?.avatarUrl);
+  const dispatch = useAppDispatch();
+  const favorites = useAppSelector((state) => state.anotherReducer.favorites);
+
+  const logoutHandler = (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    evt.preventDefault();
+    dispatch(logout());
+  };
 
   return (
     <header className="header">
@@ -32,7 +39,7 @@ function Header(): JSX.Element {
               </li>}
               <li className="header__nav-item">
                 { auth ?
-                  <Link to={AppRoute.Login} className="header__nav-link">
+                  <Link to={AppRoute.Login} onClick={logoutHandler} className="header__nav-link">
                     <span className="header__signout">Sign out</span>
                   </Link>
                   :
