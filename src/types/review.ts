@@ -4,10 +4,11 @@ export type Review = {
     'user': Author;
     'comment': string;
     'rating': number;
-}
+  }
 
 export type Author = {
     'photo': string;
     'name': string;
     'isPro': boolean;
 };
+

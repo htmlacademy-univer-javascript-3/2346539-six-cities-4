@@ -1,34 +1,35 @@
 import { Link } from 'react-router-dom';
-import Card from '../components/Card';
-import { Offer } from '../types/offerType';
+import PlaceCard from '../../components/place-card';
+import { Offer } from '../../types/offer';
 
 type FavoritesPageProp = {
   favorites: Offer[];
 };
 
-function FavoritePage({favorites}:FavoritesPageProp): JSX.Element {
+function FavouritesPage({favorites}: FavoritesPageProp): JSX.Element {
   const favoritesMap = favorites.reduce(
-    (fun: Record<string, Offer[]>, place: Offer) => {
+    (cityMap: Record<string, Offer[]>, place: Offer) => {
       const city = place.city.name;
-      fun[city] = [...(fun[city] ?? []), place];
-      return fun;
+      cityMap[city] = [...(cityMap[city] ?? []), place];
+      return cityMap;
     },
     {}
   );
+
   return (
     <div className="page">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link to='/' className="header__logo-link" >
+              <Link to='/' className="header__logo-link">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
+                  <a className="header__nav-link header__nav-link--profile">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
@@ -62,13 +63,12 @@ function FavoritePage({favorites}:FavoritesPageProp): JSX.Element {
                   </div>
                   <div className="favorites__places">
                     {favoritesMap[city].map((place) => (
-                      <Card key={place.id} offerInfo={place} searchType='regular'/>
+                      <PlaceCard key={place.id} offerInfo={place}/>
                     ))}
                   </div>
                 </li>
               ))}
             </ul>
-
           </section>
         </div>
       </main>
@@ -77,8 +77,9 @@ function FavoritePage({favorites}:FavoritesPageProp): JSX.Element {
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
         </a>
       </footer>
+    ;
     </div>
   );
 }
 
-export default FavoritePage;
+export default FavouritesPage;

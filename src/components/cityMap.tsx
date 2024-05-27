@@ -1,12 +1,12 @@
 import {Icon, Marker, layerGroup} from 'leaflet';
-import { Offers } from '../types/offerType';
+import { Offers } from '../types/offer';
 import { City } from '../types/city';
 
 import 'leaflet/dist/leaflet.css';
 import {useRef, useEffect} from 'react';
 import useMap from './hooks/useMap';
-import { URL_MARKER_DEFAULT } from './constants/all_constants';
-import 'leaflet/dist/leaflet.css';
+import { URL_MARKER_DEFAULT } from './constants/all-constants';
+
 
 type CityMapProp = {
   city: City;
