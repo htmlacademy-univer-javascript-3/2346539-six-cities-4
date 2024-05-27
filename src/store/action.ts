@@ -1,7 +1,9 @@
 import {createAction} from '@reduxjs/toolkit';
 import { LoadingStatus, sortTypes } from '../components/constants/all-constants';
+import { AuthStatus } from '../components/constants/all-constants';
 import { Offer } from '../types/offer';
 import { City } from '../types/city';
+import { Author } from '../types/review';
 
 export const cityChange = createAction<string>('сityChange');
 
@@ -16,3 +18,7 @@ export const highlightMarker = createAction<{ id: string } | null>('highlightMar
 export const loadOffers = createAction<Offer[]>('loadOffers');
 
 export const setLoadingStatus = createAction<LoadingStatus>('setLoadingStatus');
+
+export const setAuthStatus = createAction<AuthStatus>('setAuthStatus');
+
+export const setAuthor = createAction<Author | undefined>('setUser');

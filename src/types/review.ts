@@ -7,8 +7,10 @@ export type Review = {
   }
 
 export type Author = {
-    photo: string;
     name: string;
+    avatarUrl: string;
     isPro: boolean;
+    email: string;
+    token: string;
 };
 
