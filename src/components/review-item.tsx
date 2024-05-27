@@ -1,5 +1,5 @@
 import { Review } from '../types/review';
-import { getRating } from './constants/all_constants';
+import { getRating } from './constants/all-constants';
 
 type ReviewItemProps = {
   review: Review;

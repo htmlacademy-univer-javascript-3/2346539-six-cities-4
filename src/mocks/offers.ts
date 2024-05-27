@@ -1,4 +1,4 @@
-import { Offer } from '../types/offerType';
+import { Offer } from '../types/offer';
 
 export const offers: Offer[] = [
   {
@@ -14,14 +14,14 @@ export const offers: Offer[] = [
       'point': {
         'latitude': 52.3909553943508,
         'longitude': 4.85309666406198,
-      }, 
+      },
       'zoom': 5,
     },
-    'bedrooms': 3,
-    'guests': 4,
-    'price': 170,
-    'author': {
-      'previewImage':'img/avatar-angelina.jpg',
+    'numOfBedrooms': 3,
+    'numOfGuests': 4,
+    'price': 120,
+    'masterInf': {
+      'photo':'img/avatar-angelina.jpg',
       'name': 'Angelina',
       'isPro': true
     },
@@ -30,12 +30,12 @@ export const offers: Offer[] = [
 
   {
     'id': '1',
-    'previewImage': 'img/apartment-02.jpg',
-    'title': 'Luxurious studio at great location',
-    'isPremium': true,
-    'isFavorite': true,
-    'type': 'Apartment',
-    'rating': 4.8,
+    'previewImage': 'img/room.jpg',
+    'title': 'Wood and stone place',
+    'isPremium': false,
+    'isFavorite': false,
+    'type': 'Room',
+    'rating': 3,
     'city': {
       'name': 'Amsterdam',
       'point': {
@@ -44,23 +44,24 @@ export const offers: Offer[] = [
       },
       'zoom': 5,
     },
-    'bedrooms': 3,
-    'guests': 4,
-    'price': 150,
-    'author': {
-      'previewImage':'img/avatar-angelina.jpg',
+    'numOfBedrooms': 3,
+    'numOfGuests': 4,
+    'price': 80,
+    'masterInf': {
+      'photo':'img/avatar-angelina.jpg',
       'name': 'Angelina',
       'isPro': true
     },
     'nearPlaces': []
   },
 
+
   {
     'id': '2',
-    'previewImage': 'img/apartment-03.jpg',
-    'title': 'Beautiful studio at great location',
+    'previewImage': 'img/apartment-02.jpg',
+    'title': 'Canal View Prinsengracht',
     'isPremium': true,
-    'isFavorite': false,
+    'isFavorite': true,
     'type': 'Apartment',
     'rating': 4.8,
     'city': {
@@ -71,21 +72,22 @@ export const offers: Offer[] = [
       },
       'zoom': 5,
     },
-    'bedrooms': 3,
-    'guests': 4,
-    'price': 140,
-    'author': {
-      'previewImage':'img/avatar-angelina.jpg',
+    'numOfBedrooms': 3,
+    'numOfGuests': 4,
+    'price': 132,
+    'masterInf': {
+      'photo':'img/avatar-angelina.jpg',
       'name': 'Angelina',
       'isPro': true
     },
     'nearPlaces': []
   },
 
+
   {
     'id': '3',
-    'previewImage': 'img/room.jpg',
-    'title': 'Beautiful room',
+    'previewImage': 'img/apartment-03.jpg',
+    'title': 'Nice, cozy, warm big bed apartment',
     'isPremium': true,
     'isFavorite': true,
     'type': 'Apartment',
@@ -98,18 +100,17 @@ export const offers: Offer[] = [
       },
       'zoom': 5,
     },
-    'bedrooms': 3,
-    'guests': 4,
-    'price': 150,
-    'author': {
-      'previewImage':'img/avatar-angelina.jpg',
+    'numOfBedrooms': 3,
+    'numOfGuests': 4,
+    'price': 180,
+    'masterInf': {
+      'photo':'img/avatar-angelina.jpg',
       'name': 'Angelina',
       'isPro': true
     },
     'nearPlaces': []
   },
 ];
-
 
 offers[0].nearPlaces = [offers[1], offers[2], offers[3]];
 offers[1].nearPlaces = [offers[0], offers[2], offers[3]];

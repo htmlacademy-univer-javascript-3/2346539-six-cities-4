@@ -1,11 +1,11 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { Offer } from '../types/offerType';
-import CommentSubmissionForm from '../components/comment-submission-form';
-import ReviewsList from '../components/review-list';
-import CityMap from '../components/cityMap';
-import CardsList from '../components/CardList';
-import { Review } from '../types/review';
-import AppLink from '../components/links';
+import { Offer } from '../../types/offer';
+import CommentSubmissionForm from '../../components/comment-submission-form';
+import ReviewsList from '../../components/reviews-list';
+import CityMap from '../../components/cityMap';
+import CardsList from '../../components/cards-list';
+import { Review } from '../../types/review';
+import { AppRoute } from '../../components/constants/all-constants';
 
 type OfferPageProps = {
   reviews: Review[];
@@ -18,7 +18,7 @@ function OfferPage({reviews, offers}: OfferPageProps): JSX.Element {
   const selectedOffer = offers.find((offer) => offer.id === numId);
   return (
     !selectedOffer
-      ? <Navigate to={AppLink.errorPage} />
+      ? <Navigate to={AppRoute.NotFound} />
       :
       <div className="page">
         <header className="header">
@@ -184,7 +184,7 @@ function OfferPage({reviews, offers}: OfferPageProps): JSX.Element {
           <div className="container">
             <section className="near-places places"/>
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <CardsList citiesCards={selectedOffer.nearPlaces} searchType={'near'}/>
+            <CardsList citiesCards={selectedOffer.nearPlaces}/>
           </div>
         </main>
       </div>
