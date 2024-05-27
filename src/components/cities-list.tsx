@@ -1,5 +1,5 @@
 import { useAppDispatch } from './hooks/index.ts';
-import { cityChange } from '../action.ts';
+import { cityChange } from '../store/action.ts';
 
 
 type CitiesListProps = {

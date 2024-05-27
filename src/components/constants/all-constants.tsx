@@ -5,6 +5,16 @@ export const enum AuthStatus {
     Unknown = 'UNKNOWN'
 }
 
+export const CITY_CARD_WIDTH = '260';
+
+export const CITY_CARD_HEIGHT = '200';
+
+export const REVIEW_SIZE = '54';
+
+export const BOOKMARK_ICON_WIDTH = '18';
+
+export const BOOKMARK_ICON_HEIGHT = '19';
+
 export const enum AppRoute {
     Main = '/',
     Login = '/login',
@@ -20,4 +30,15 @@ export const Settings = {
 export const URL_MARKER_DEFAULT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
 
+export const URL_MARKER_CURRENT =
+  'public/img/pin-active.svg';
+
 export const getRating = (rate: number) => `${(rate / 5) * 100}%`;
+
+export enum sortTypes {
+  Popular = 'Popular',
+  PriceUp = 'Price: low to high',
+  PriceDown = 'Price: high to low',
+  Top = 'Top rated first',
+}
+

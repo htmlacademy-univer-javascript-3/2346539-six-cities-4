@@ -9,7 +9,7 @@ import PrivateRoute from './private-route';
 import { Offer } from '../types/offer';
 import { Review } from '../types/review';
 import { useAppDispatch, useAppSelector } from './hooks/index.ts';
-import { listFilling } from '../action.ts';
+import { listFilling } from '../store/action.ts';
 
 type AppPageProps = {
   reviews: Review[];
@@ -25,7 +25,7 @@ function App({reviews}: AppPageProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<MainPage favorites = {favorites}/>}/>
+        <Route path={AppRoute.Main} element={<MainPage favorites={favorites}/>}/>
 
         <Route path={AppRoute.Login} element={<LoginPage/>}/>
 
@@ -37,7 +37,7 @@ function App({reviews}: AppPageProps): JSX.Element {
           }
         />
 
-        <Route path={AppRoute.Offer} element={<OfferPage reviews={reviews} offers={offers}/>}/>
+        <Route path={AppRoute.Offer} element={<OfferPage reviews={reviews} favorites={offers}/>}/>
 
         <Route path={AppRoute.NotFound} element={<NotFoundPage/>}/>
       </Routes>

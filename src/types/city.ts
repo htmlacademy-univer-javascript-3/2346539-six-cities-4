@@ -1,8 +1,11 @@
+export type Point = {
+    id: string;
+    latitude: number;
+    longitude: number;
+}
+
 export type City = {
-    'name': string;
-    'point': {
-        'latitude': number;
-        'longitude': number;
-    };
-    'zoom': number;
+    name: string;
+    point: Point;
+    zoom: number;
 }

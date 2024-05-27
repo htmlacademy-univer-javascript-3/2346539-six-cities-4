@@ -33,7 +33,7 @@ function FavouritesPage({favorites}: FavoritesPageProp): JSX.Element {
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
+                    <span className="header__favorite-count">{favorites.length}</span>
                   </a>
                 </li>
                 <li className="header__nav-item">
@@ -63,7 +63,7 @@ function FavouritesPage({favorites}: FavoritesPageProp): JSX.Element {
                   </div>
                   <div className="favorites__places">
                     {favoritesMap[city].map((place) => (
-                      <PlaceCard key={place.id} offerInfo={place}/>
+                      <PlaceCard key={place.id} offerInfo={place} cityCardType='typical'/>
                     ))}
                   </div>
                 </li>
