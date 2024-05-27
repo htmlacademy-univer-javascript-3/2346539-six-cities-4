@@ -12,11 +12,15 @@ export type Offer = {
     rating: number;
     title: string;
     type: string;
-    reviews: Review[];
-    masterInf: Author;
-    nearPlaces: Offers;
-    images: { src: string; alt: string }[];
-    description: string;
+
+    reviews?: Review[];
+    nearPlaces?: Offers;
+    images: string[];
+    description?: string;
+    bedrooms?: number;
+    goods?: string[];
+    host?: Author;
+    maxAdults?: number;
 };
 
 export type Offers = Offer[]

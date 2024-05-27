@@ -52,16 +52,15 @@ function PlaceCard({ offerInfo, cityCardType }: PlaceCardProp): JSX.Element {
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
             <button
-              className="place-card__bookmark-button place-card__bookmark-button--active button"
+              className={`place-card__bookmark-button button ${isFavorite ? 'place-card__bookmark-button--active' : ''}`}
               type="button"
             >
-              {isFavorite &&
               <span>
                 <svg className="place-card__bookmark-icon" width="18" height="19">
                   <use xlinkHref="#icon-bookmark"></use>
                 </svg>
                 <span className="visually-hidden">In bookmarks</span>
-              </span>}
+              </span>
             </button>
           </div>
           <div className="place-card__rating rating">
@@ -71,7 +70,7 @@ function PlaceCard({ offerInfo, cityCardType }: PlaceCardProp): JSX.Element {
             </div>
           </div>
           <h2 className="place-card__name">{title}</h2>
-          <p className="place-card__type">{type}</p>
+          <p className="place-card__type">{type.toUpperCase()}</p>
         </div>
       </article>
     </Link>
