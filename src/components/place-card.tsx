@@ -1,6 +1,6 @@
 import { Offer } from '../types/offer';
 import { Link } from 'react-router-dom';
-import { BOOKMARK_ICON_HEIGHT, BOOKMARK_ICON_WIDTH, CITY_CARD_HEIGHT, CITY_CARD_WIDTH } from './constants/all-constants';
+import { CITY_CARD_HEIGHT, CITY_CARD_WIDTH } from './constants/all-constants';
 import { getRating } from './constants/all-constants';
 import { useAppDispatch } from './hooks';
 import { highlightMarker } from '../store/action';
@@ -11,28 +11,27 @@ type PlaceCardProp = {
 };
 
 function PlaceCard({ offerInfo, cityCardType }: PlaceCardProp): JSX.Element {
+
   const {
     id,
-    previewImage,
     title,
-    isPremium,
-    isFavorite,
     type,
-    rating,
-    //city,
-    //numOfBedrooms,
-    //numOfGuests,
     price,
-    //masterInf,
+    //city,
+    //location,
+    isFavorite,
+    isPremium,
+    rating,
+    previewImage,
   } = offerInfo;
 
   const dispatch = useAppDispatch();
 
   return (
-    <Link to={`/offer/${id}`} state={offerInfo}>
+    <Link to={`/offer/${offerInfo.id}`} state={offerInfo}>
       <article
         className={`${cityCardType === 'typical' ? 'cities__card place-card' : 'near-places__card place-card'}`}
-        onMouseOver={() => dispatch(highlightMarker({ id }))}
+        onMouseEnter={() => dispatch(highlightMarker({id}))}
         onMouseLeave={() => dispatch(highlightMarker(null))}
         onClick={() => window.scrollTo(0, 0)}
       >
@@ -56,10 +55,13 @@ function PlaceCard({ offerInfo, cityCardType }: PlaceCardProp): JSX.Element {
               className="place-card__bookmark-button place-card__bookmark-button--active button"
               type="button"
             >
-              <svg className="place-card__bookmark-icon" width={BOOKMARK_ICON_WIDTH} height={BOOKMARK_ICON_HEIGHT}>
-                {isFavorite && <use xlinkHref="#icon-bookmark"></use>}
-              </svg>
-              <span className="visually-hidden">In bookmarks</span>
+              {isFavorite &&
+              <span>
+                <svg className="place-card__bookmark-icon" width="18" height="19">
+                  <use xlinkHref="#icon-bookmark"></use>
+                </svg>
+                <span className="visually-hidden">In bookmarks</span>
+              </span>}
             </button>
           </div>
           <div className="place-card__rating rating">

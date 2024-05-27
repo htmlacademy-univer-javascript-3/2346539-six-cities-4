@@ -6,38 +6,25 @@ import OfferPage from '../pages/offer-page/offer-page';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
 import { AppRoute, AuthStatus } from './constants/all-constants';
 import PrivateRoute from './private-route';
-import { Offer } from '../types/offer';
-import { Review } from '../types/review';
-import { useAppDispatch, useAppSelector } from './hooks/index.ts';
-import { listFilling } from '../store/action.ts';
 
-type AppPageProps = {
-  reviews: Review[];
-};
 
-function App({reviews}: AppPageProps): JSX.Element {
-  const offers: Offer[] = useAppSelector((state) => state.offers);
-  const dispatch = useAppDispatch();
-  dispatch(listFilling());
-
-  const favorites = offers.filter((o) => o.isFavorite);
-
+function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<MainPage favorites={favorites}/>}/>
+        <Route path={AppRoute.Main} element={<MainPage/>}/>
 
         <Route path={AppRoute.Login} element={<LoginPage/>}/>
 
         <Route path={AppRoute.Favorites}
           element={
             <PrivateRoute authStatus={AuthStatus.Auth}>
-              <FavouritesPage favorites={favorites}/>
+              <FavouritesPage/>
             </PrivateRoute>
           }
         />
 
-        <Route path={AppRoute.Offer} element={<OfferPage reviews={reviews} favorites={offers}/>}/>
+        <Route path={AppRoute.Offer} element={<OfferPage/>}/>
 
         <Route path={AppRoute.NotFound} element={<NotFoundPage/>}/>
       </Routes>
