@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { CITY_CARD_HEIGHT, CITY_CARD_WIDTH } from './constants/all-constants';
 import { getRating } from './constants/all-constants';
 import { useAppDispatch } from './hooks';
-import { highlightMarker } from '../store/action';
+import { highlightMarker } from '../store/offer/offer-actions';
+import { toggleFavoriteStatus } from '../store/api-actions';
 
 type PlaceCardProp = {
   offerInfo: Offer;
@@ -11,7 +12,6 @@ type PlaceCardProp = {
 };
 
 function PlaceCard({ offerInfo, cityCardType }: PlaceCardProp): JSX.Element {
-
   const {
     id,
     title,
@@ -27,11 +27,15 @@ function PlaceCard({ offerInfo, cityCardType }: PlaceCardProp): JSX.Element {
 
   const dispatch = useAppDispatch();
 
+  const handleBookmarkClick = () => {
+    dispatch(toggleFavoriteStatus({ offerId: id, status: isFavorite ? 0 : 1 }));
+  };
+
   return (
-    <Link to={`/offer/${offerInfo.id}`} state={offerInfo}>
+    <Link to={`/offer/${id}`} state={offerInfo}>
       <article
         className={`${cityCardType === 'typical' ? 'cities__card place-card' : 'near-places__card place-card'}`}
-        onMouseEnter={() => dispatch(highlightMarker({id}))}
+        onMouseEnter={() => dispatch(highlightMarker({ id }))}
         onMouseLeave={() => dispatch(highlightMarker(null))}
         onClick={() => window.scrollTo(0, 0)}
       >
@@ -41,9 +45,7 @@ function PlaceCard({ offerInfo, cityCardType }: PlaceCardProp): JSX.Element {
           </div>
         )}
         <div className="cities__image-wrapper place-card__image-wrapper">
-          <img className="place-card__image" src={previewImage} width={CITY_CARD_WIDTH} height={CITY_CARD_HEIGHT}
-            alt="Place image"
-          />
+          <img className="place-card__image" src={previewImage} width={CITY_CARD_WIDTH} height={CITY_CARD_HEIGHT} alt="Place image" />
         </div>
         <div className="place-card__info">
           <div className="place-card__price-wrapper">
@@ -53,14 +55,12 @@ function PlaceCard({ offerInfo, cityCardType }: PlaceCardProp): JSX.Element {
             </div>
             <button
               className={`place-card__bookmark-button button ${isFavorite ? 'place-card__bookmark-button--active' : ''}`}
-              type="button"
+              onClick={handleBookmarkClick} type="button"
             >
-              <span>
-                <svg className="place-card__bookmark-icon" width="18" height="19">
-                  <use xlinkHref="#icon-bookmark"></use>
-                </svg>
-                <span className="visually-hidden">In bookmarks</span>
-              </span>
+              <svg className="place-card__bookmark-icon" width="18" height="19">
+                <use xlinkHref="#icon-bookmark"></use>
+              </svg>
+              <span className="visually-hidden">To bookmarks</span>
             </button>
           </div>
           <div className="place-card__rating rating">

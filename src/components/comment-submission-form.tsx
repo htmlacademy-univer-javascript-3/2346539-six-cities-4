@@ -19,9 +19,9 @@ function CommentSubmissionForm(): JSX.Element {
     setFormData({ ...formData, comment: event.target.value });
   };
 
-  const user = useAppSelector((state) => state.author!);
-  const id = useAppSelector((state) => state.currentOffer!.id);
-  const loadingStatus = useAppSelector((state) => state.loadingStatus);
+  const user = useAppSelector((state) => state.userReducer.author!);
+  const id = useAppSelector((state) => state.offersReducer.currentOffer!.id);
+  const loadingStatus = useAppSelector((state) => state.offersReducer.loadingStatus);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(postReview({

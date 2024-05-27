@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useAppSelector, useAppDispatch } from '../../components/hooks/index.ts';
 import CardsList from '../../components/cards-list';
 import CityMap from '../../components/cityMap';
@@ -6,7 +6,7 @@ import CitiesList from '../../components/cities-list.tsx';
 import Sorting from '../../components/sorting.tsx';
 import Spinner from '../../components/spinner.tsx';
 import useSort from '../../components/hooks/useSort.ts';
-import { cityChange, setCity } from '../../store/action';
+import { cityChange, setCity } from '../../store/another/another-actions.ts';
 import { Cities } from '../../components/constants/cities.tsx';
 import { sortTypes, LoadingStatus } from '../../components/constants/all-constants.tsx';
 import { Offer } from '../../types/offer';
@@ -15,9 +15,10 @@ import Header from '../../components/header.tsx';
 
 function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();
-  const offers: Offer[] = useAppSelector((state) => state.offers);
-  const currentCity = useAppSelector((state) => state.city);
-  const loadingStatus = useAppSelector((state) => state.loadingStatus);
+  const offers: Offer[] = useAppSelector((state) => state.offersReducer.offers);
+  const currentCity = useAppSelector((state) => state.anotherReducer.city);
+  const cityForMap = useAppSelector((state) => state.anotherReducer.city);
+  const loadingStatus = useAppSelector((state) => state.offersReducer.loadingStatus);
   const currentCityOffers = offers.filter((offer: Offer) => offer.city.name === currentCity.name);
 
   const [selectedSort, selectSort] = useState<sortTypes>(sortTypes.Popular);
@@ -27,7 +28,7 @@ function MainPage(): JSX.Element {
     dispatch(setCity(newCity));
   };
 
-  useEffect(() => {
+  useMemo(() => {
     if (offers.length > 0 && !currentCityOffers.length) {
       dispatch(cityChange(offers[0].city.name));
     }
@@ -53,12 +54,14 @@ function MainPage(): JSX.Element {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{currentCityOffers.length} places to stay in {currentCity.name}</b>
               <Sorting onClick={selectSort} sortByCurrent={selectedSort}/>
-              {loadingStatus === LoadingStatus.Pending && <Spinner />}
-              <CardsList citiesCards={sortedOffers} listType={'typical'}/>
+              <div className="cities__places-list places__list tabs__content">
+                {loadingStatus === LoadingStatus.Pending && <Spinner />}
+                <CardsList citiesCards={sortedOffers} listType={'typical'}/>
+              </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <CityMap city={currentCity} points={currentCityOffers}/>
+                <CityMap city={cityForMap} points={currentCityOffers}/>
               </section>
             </div>
           </div>
