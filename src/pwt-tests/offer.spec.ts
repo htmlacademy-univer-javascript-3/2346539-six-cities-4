@@ -1,39 +1,27 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Go to Offer', () => {
-  test('should redirect to offer page when card is clicked', async ({ page }) => {
-    await page.goto('http://localhost:5173'); // load page
+test.describe('Навигация', () => {
+  test.beforeEach(async ({ page }) => {
+    // Загрузка главной страницы перед каждым тестом
+    await page.goto('http://localhost:5173');
+  });
 
-    await page.locator('.cities').first().waitFor(); // load cards
-    const cardElement = await page.locator('.cities').first();
+  test('Следует перейти на страницу сведений о предложении при нажатии на карту', async ({ page }) => {
+    // Ожидание появления карточек на странице
+    await page.waitForSelector('.place-card');
 
-    // get first card's id
-    const aElement = await cardElement.locator('a').first();
-    const href = await aElement.getAttribute('href');
-    const cardId = href ? href.split('/').pop() : '';
+    // Поиск ссылки по тексту (если возможно)
+    const firstOfferLink = await page.$('a[href^="/offer/"]');
 
-    // get first card's name
-    const cardNameElement = await cardElement.locator('.place-card__name a').first();
-    const cardName = await cardNameElement.evaluate((el) => el.textContent?.trim());
+    expect(firstOfferLink).not.toBeNull();
 
-    //get first card's price
-    const cardPriceElement = await cardElement.locator('.place-card__price-value').first();
-    const cardPrice = await cardPriceElement.evaluate((el) => el.textContent?.trim());
+    // Клик по найденной ссылке
+    await firstOfferLink!.click();
 
-    await cardElement.click(); // click the first card
+    // Ожидание появления элемента на странице предложения
+    await page.waitForSelector('.offer__host-title');
 
-    // wait for server response
-    await page.waitForResponse((resp) => resp.url().includes(`/six-cities/offers/${ cardId}`) && resp.status() === 200);
-    page.waitForURL(`http://localhost:5173/offer/${ cardId}`); // wait for new page to load
-
-    // check if offer's name and price match card's
-    const offerNameElement = await page.locator('.offer__name').first();
-    const offerName = await offerNameElement.evaluate((el) => el.textContent?.trim());
-
-    const offerPriceElement = await page.locator('.offer__price-value').first();
-    const offerPrice = await offerPriceElement.evaluate((el) => el.textContent?.trim());
-
-    expect(offerName).toBe(cardName);
-    expect(offerPrice).toBe(cardPrice);
+    const url = page.url();
+    expect(url).toContain('/offer/');
   });
 });

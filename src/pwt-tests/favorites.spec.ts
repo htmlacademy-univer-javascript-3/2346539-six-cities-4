@@ -37,10 +37,22 @@ test.describe('Добавление в избранное', () => {
     
       const count = await page.locator('.header__favorite-count').textContent() || 0;
       await page.waitForTimeout(1000);
-      expect(Number(count)).toBe(Number(initialCount)+1);
 
-      await page.waitForTimeout(1000);
+
+    
       await page.goto('http://localhost:5173');
+
+      await page.waitForSelector('.cities__card');
+      await page.getByText('Sign in').click();
+
+      await page.fill('input[name="email"]', 'mihail.nikanorenkov@yandex.ru');
+      await page.fill('input[name="password"]', 'M5');
+      await page.click('button[type="submit"]');
+
+      const cardElementDel = page.locator('.cities').first();
+      const aElementDel = cardElement.locator('a').first();
+      const hrefDel = await aElement.getAttribute('href');
+      const cardIdDel = href ? href.split('/').pop() : '';
       await page.waitForTimeout(1000);
       await page.locator('.cities__places-list').first().waitFor; // load cards
       const cardElementsDel = await page.locator('.cities__places-list');
@@ -50,5 +62,8 @@ test.describe('Добавление в избранное', () => {
       await page.waitForTimeout(1000);
       const addToFavoritesButtonDel = await page.locator('.offer__bookmark-button');
       await addToFavoritesButtonDel.click();
+      await page.waitForTimeout(1000);
+    
+      expect(Number(count)).toBe(Number(initialCount)+1);
     });
 });

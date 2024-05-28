@@ -6,7 +6,7 @@ test('Валидная авторизация', async ({ page }) => {
 
   // Валидная попытка входа
   await page.fill('input[name="email"]', 'mihail.nikanorenkov@yandex.ru');
-  await page.fill('input[name="password"]', 'v2024');
+  await page.fill('input[name="password"]', 'M5');
 
 
   // Проверка, что пользователь был перенаправлен на главную страницу

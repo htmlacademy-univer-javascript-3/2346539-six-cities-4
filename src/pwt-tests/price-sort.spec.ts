@@ -1,79 +1,62 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Сортировка предложений', () => {
+test.describe('Сортировка', () => {
+  test.beforeEach(async ({ page }) => {
 
-  test('Сортировка по повышению цен', async ({page}) => {
     await page.goto('http://localhost:5173');
-    await page.waitForSelector('.cities__card');
-
-    await page.locator('p').filter({ hasText: 'Popular' }).click();
-    const options = await page.locator('.places__option').all();
-    await options[1].click();
-
-    await page.waitForSelector('.places__found', { state: 'attached' });
-    await page.waitForSelector('.cities__card', { state: 'attached' });
-
-    const cardElements = await page.locator('.cities__card').all();
-    expect(cardElements.length).toBeGreaterThan(0);
-
-    const pricesLocators = await page.locator('.place-card__info .place-card__price-value').all();
-
-    const prices = await Promise.all(pricesLocators.map(async (locator) => {
-      const text = await locator.innerText();
-      return parseInt(text.replace(/^\D+/g, ''), 10);
-    }));
-
-    const sortedPrices = [...prices].sort((a, b) => a - b);
-    expect(prices).toEqual(sortedPrices);
   });
 
-  test('Сортировка по понижению цен', async ({page}) => {
-    await page.goto('http://localhost:5173');
-    await page.waitForSelector('.cities__card');
+  test('Сортировка по популярности', async ({ page }) => {
 
-    await page.locator('p').filter({ hasText: 'Popular' }).click();
-    const options = await page.locator('.places__option').all();
-    await options[2].click();
-
-    await page.waitForSelector('.places__found', { state: 'attached' });
-    await page.waitForSelector('.cities__card', { state: 'attached' });
-
-    const cardElements = await page.locator('.cities__card').all();
-    expect(cardElements.length).toBeGreaterThan(0);
-
-    const pricesLocators = await page.locator('.place-card__info .place-card__price-value').all();
-
-    const prices = await Promise.all(pricesLocators.map(async (locator) => {
-      const text = await locator.innerText();
-      return parseInt(text.replace(/^\D+/g, ''), 10);
-    })); // get all offers prices
-
-    const sortedPrices = [...prices].sort((a, b) => b - a); // sort prices high to low
-    expect(prices).toEqual(sortedPrices);
+    await page.waitForSelector('.place-card');
+    await page.click('.places__sorting-type');
+    await page.click('text=Popular');
+    await page.waitForTimeout(1000);
+    const offers = await page.$$eval('.place-card__price-value', (elements) =>
+      elements.map((el) => parseFloat(el.textContent?.replace('€', '') ?? '0'))
+    );
+    expect(offers.length).toBeGreaterThan(0);
   });
 
-  test('Сортировка по понижению рейтинга', async ({page}) => {
-    await page.goto('http://localhost:5173');
-    await page.waitForSelector('.cities__card');
+  test('Сортировка: low to high', async ({ page }) => {
+    await page.waitForSelector('.place-card');
+    await page.click('.places__sorting-type');
+    await page.click('text=Price: low to high');
+    await page.waitForTimeout(1000);
+    const prices = await page.$$eval('.place-card__price-value', (elements) =>
+      elements.map((el) => parseFloat(el.textContent?.replace('€', '') ?? '0'))
+    );
 
-    await page.locator('p').filter({ hasText: 'Popular' }).click();
-    const options = await page.locator('.places__option').all();
-    await options[3].click();
+    for (let i = 0; i < prices.length - 1; i++) {
+      expect(prices[i]).toBeLessThanOrEqual(prices[i + 1]);
+    }
+  });
 
-    await page.waitForSelector('.places__found', { state: 'attached' });
-    await page.waitForSelector('.cities__card', { state: 'attached' });
+  test('Сортировка: high to low', async ({ page }) => {
+    await page.waitForSelector('.place-card');
+    await page.click('.places__sorting-type');
+    await page.click('text=Price: high to low');
+    await page.waitForTimeout(1000);
+    const prices = await page.$$eval('.place-card__price-value', (elements) =>
+      elements.map((el) => parseFloat(el.textContent?.replace('€', '') ?? '0'))
+    );
 
-    const cardElements = await page.locator('.cities__card').all();
-    expect(cardElements.length).toBeGreaterThan(0);
+    for (let i = 0; i < prices.length - 1; i++) {
+      expect(prices[i]).toBeGreaterThanOrEqual(prices[i + 1]);
+    }
+  });
 
-    const ratingsLocators = await page.locator('.place-card__rating').all();
+  test('Сортировка по рейтингу', async ({ page }) => {
+    await page.waitForSelector('.place-card');
+    await page.click('.places__sorting-type');
+    await page.click('text=Top rated first');
+    await page.waitForTimeout(1000);
+    const ratings = await page.$$eval('.place-card__stars span[style*="width"]', (elements) =>
+      elements.map((el) => parseFloat(el.style.width?.replace('%', '') ?? '0'))
+    );
 
-    const ratings = await Promise.all(ratingsLocators.map(async (locator) => {
-      const rating = await locator.getAttribute('data-test');
-      return parseFloat(String(rating).replace(/^\D+/g, '') ?? '0');
-    })); // get all offers ratings
-
-    const sortedRatings = [...ratings].sort((a, b) => b - a);
-    expect(ratings).toEqual(sortedRatings);
+    for (let i = 0; i < ratings.length - 1; i++) {
+      expect(ratings[i]).toBeGreaterThanOrEqual(ratings[i + 1]);
+    }
   });
 });

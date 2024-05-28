@@ -16,8 +16,8 @@ test('Форма отправки комментария (неавторизов
 
   await page.goto('http://localhost:5173/login');
 
-  await page.fill('input[name="email"]', 'test@gmail.com');
-  await page.fill('input[name="password"]', 'v2024');
+  await page.fill('input[name="email"]', 'mishan@gmail.com');
+  await page.fill('input[name="password"]', 'M5');
   await page.click('button[type="submit"]');
 
   await page.waitForSelector('.cities__card');
@@ -55,7 +55,7 @@ test('Форма отправки комментария (неавторизов
     .getAttribute('style');
 
   expect(reviewText).toBe(REVIEW_TEXT);
-  expect(reviewAuthor).toBe('test');
+  expect(reviewAuthor).toBe('mishan');
   expect(reviewRating).toBe('width: 80%;');
 });
 
